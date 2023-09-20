@@ -2,10 +2,8 @@
 
 # Data Analyst
 ## Education
-### Master of Business Administration, Project Management
-### University of North Alabama
-### Bachelor of Business Administration, Management
-### Martin Methodist College (University of Tennessee Southern)
+### MBA, Project Management | University of North Alabama 
+### BBA, Management | Martin Methodist College (University of Tennessee Southern)
 
 ## Professional Experience
 ### Amazon.com, May 2018-Present
