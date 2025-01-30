@@ -6,7 +6,7 @@
 
 ## Professional Experience
 #### Business Analyst @ Amazon.com May 2022-Present
-##### Forecast, analyze, and lead business actions to lower $12-32MM of weekly logistics cost.
+##### Forecast, analyze, and lead business actions to lower weekly logistics cost.
 ##### Review actual package volumes compared to forecast and root cause abnormal variance.
 
 #### Area Manager @ Amazon.com May 2019-May 2022
