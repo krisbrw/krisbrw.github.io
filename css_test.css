@@ -1,0 +1,11 @@
+h1 {
+	font-family:'SmallCaps', sans-serif;
+	font-size: 10em;
+	font-weight: bold;
+}
+
+p {
+	font-family: cursive
+	font-size: 3em;
+	font-weight: lighter;
+}
