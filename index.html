@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kris Brown — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border-bright: rgba(255,255,255,0.15);
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --accent: #7c6af7;
+    --accent2: #4fd1a5;
+    --accent3: #f7916a;
+    --glow: rgba(124,106,247,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+
+  .hero-title .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 400; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #9080ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,106,247,0.35);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border-bright);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* hero right — terminal card */
+  .hero-terminal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 0.9s ease forwards 0.5s;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+
+  .terminal-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .terminal-dot:nth-child(1) { background: #ff5f57; }
+  .terminal-dot:nth-child(2) { background: #febc2e; }
+  .terminal-dot:nth-child(3) { background: #28c840; }
+
+  .terminal-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-left: 0.5rem;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--accent2); }
+  .t-cmd { color: var(--text); }
+  .t-comment { color: var(--muted); }
+  .t-key { color: var(--accent); }
+  .t-val { color: var(--accent3); }
+  .t-cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 3.5rem;
+  }
+
+  /* divider line */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 400; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .stat-cell {
+    background: var(--bg2);
+    padding: 1.75rem;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.25rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 12px;
+  }
+
+  .project-card.kiwi::before { background: radial-gradient(ellipse at top left, rgba(79,209,165,0.08), transparent 60%); }
+  .project-card.athenium::before { background: radial-gradient(ellipse at top left, rgba(247,145,106,0.08), transparent 60%); }
+
+  .project-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag-kiwi { background: rgba(79,209,165,0.12); color: var(--accent2); }
+  .tag-athenium { background: rgba(247,145,106,0.12); color: var(--accent3); }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.7;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .stack-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .project-card.kiwi .project-link:hover { color: var(--accent2); }
+  .project-card.athenium .project-link:hover { color: var(--accent3); }
+
+  .project-link svg { transition: transform 0.2s; }
+  .project-link:hover svg { transform: translate(2px, -2px); }
+
+  /* SKILLS */
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .skills-table tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .skills-table tr:last-child { border-bottom: none; }
+  .skills-table tr:hover { background: var(--bg2); }
+
+  .skills-table td {
+    padding: 1.1rem 1rem;
+    vertical-align: top;
+  }
+
+  .skills-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    width: 180px;
+    padding-left: 0;
+  }
+
+  .skills-table td:last-child {
+    color: var(--muted);
+    padding-right: 0;
+  }
+
+  .skills-table td:last-child strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* background glow blobs */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+
+  .blob-1 {
+    width: 500px; height: 500px;
+    background: var(--accent);
+    top: -100px; left: -100px;
+    animation: drift1 18s ease-in-out infinite alternate;
+  }
+
+  .blob-2 {
+    width: 400px; height: 400px;
+    background: var(--accent2);
+    bottom: 20%; right: -80px;
+    animation: drift2 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift1 {
+    from { transform: translate(0, 0); }
+    to { transform: translate(60px, 80px); }
+  }
+
+  @keyframes drift2 {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-50px, -60px); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-terminal { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<nav>
+  <a href="#" class="nav-logo">kris<span>.</span>brown</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="https://github.com/krisbrw" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">Software Developer · Nashville, TN</p>
+      <h1 class="hero-title">
+        Building things<br>
+        <span class="line2">that matter.</span>
+      </h1>
+      <p class="hero-desc">
+        I build <strong>data platforms</strong>, <strong>finance tools</strong>, and
+        <strong>AI-powered products</strong> — with a focus on clean architecture
+        and real-world utility.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="https://github.com/krisbrw" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <span class="terminal-title">krisbrw ~ stack.json</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">$ </span><span class="t-cmd">cat stack.json</span></div>
+        <div class="t-comment">{</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"languages"</span>: <span class="t-val">"JS · Python · SQL"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"frontend"</span>: <span class="t-val">"React · React Native"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"backend"</span>: <span class="t-val">"Node.js · Express"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"cloud"</span>: <span class="t-val">"AWS Lambda · RDS · S3"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"data"</span>: <span class="t-val">"PostgreSQL · Scraping"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"ai_tools"</span>: <span class="t-val">"Claude Code · Kiro"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-val">"Nashville, TN"</span></div>
+        <div class="t-comment">}</div>
+        <div><span class="t-prompt">$ </span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label reveal">About me</p>
+  <h2 class="section-title reveal">Developer. Builder.<br>Nashville native.</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm a software developer based in <strong>Nashville, TN</strong>, building
+        full-stack applications across web, mobile, and cloud infrastructure.
+        My work sits at the intersection of <strong>data engineering</strong>,
+        <strong>product development</strong>, and <strong>AI tooling</strong>.
+      </p>
+      <p>
+        I'm currently developing <strong>Kiwi-Finance</strong>, a personal finance
+        app with real-time budget tracking, and <strong>Athenium</strong>, a
+        Nashville data platform that ingests and exposes local data as a
+        commercial product.
+      </p>
+      <p>
+        I build across the full stack — React Native for mobile, Node.js and
+        Python on the backend, PostgreSQL for data, and AWS for infrastructure.
+        I use <strong>Claude Code</strong> and <strong>Kiro</strong> as part of
+        my development workflow.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-cell">
+        <div class="stat-num">3</div>
+        <div class="stat-label">active projects</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">languages & frameworks</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">AWS</div>
+        <div class="stat-label">cloud platform</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">Nash</div>
+        <div class="stat-label">ville, TN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">Work</p>
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="projects-grid">
+
+    <a class="project-card kiwi reveal" href="https://github.com/krisbrw/kiwi-finance" target="_blank">
+      <span class="project-tag tag-kiwi">Finance · Mobile · Web</span>
+      <h3 class="project-name">Kiwi-Finance</h3>
+      <p class="project-desc">
+        Personal finance app with real-time budget tracking across bank accounts.
+        Plaid API integration for automatic transaction sync, WebSocket-powered
+        live budget updates, and a React Native Android app alongside a React web app.
+      </p>
+      <div class="project-stack">
+        <span class="stack-pill">React Native</span>
+        <span class="stack-pill">React.js</span>
+        <span class="stack-pill">Node.js</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">Plaid API</span>
+        <span class="stack-pill">AWS Lambda</span>
+        <span class="stack-pill">AWS Cognito</span>
+      </div>
+      <span class="project-link">
+        View on GitHub
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="project-card athenium reveal" href="https://github.com/krisbrw/athenium" target="_blank">
+      <span class="project-tag tag-athenium">Data · Analytics · API</span>
+      <h3 class="project-name">Athenium</h3>
+      <p class="project-desc">
+        Nashville data platform — named for the city's nickname, the Athens of the South.
+        Combines API ingestion from Nashville open data sources with web scraping
+        for rent prices, exposing enriched datasets as a commercial data product.
+      </p>
+      <div class="project-stack">
+        <span class="stack-pill">Python</span>
+        <span class="stack-pill">Node.js</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">AWS Lambda</span>
+        <span class="stack-pill">S3</span>
+        <span class="stack-pill">REST API</span>
+        <span class="stack-pill">Stripe</span>
+      </div>
+      <span class="project-link">
+        View on GitHub
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">Capabilities</p>
+  <h2 class="section-title reveal">Skills & stack</h2>
+  <table class="skills-table reveal">
+    <tbody>
+      <tr>
+        <td>Languages</td>
+        <td><strong>JavaScript</strong> · TypeScript · <strong>Python</strong> · <strong>SQL</strong> · HTML · CSS</td>
+      </tr>
+      <tr>
+        <td>Frontend</td>
+        <td><strong>React.js</strong> · <strong>React Native</strong> (Android-first)</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td><strong>Node.js</strong> · Express · REST APIs · WebSockets</td>
+      </tr>
+      <tr>
+        <td>Database</td>
+        <td><strong>PostgreSQL</strong> · AWS RDS · schema design · SQL migrations</td>
+      </tr>
+      <tr>
+        <td>Cloud — AWS</td>
+        <td><strong>Lambda</strong> · <strong>RDS</strong> · <strong>S3</strong> · API Gateway · Cognito · Secrets Manager · EventBridge</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Web scraping · API ingestion · data pipelines · Jupyter · Pandas</td>
+      </tr>
+      <tr>
+        <td>AI tooling</td>
+        <td><strong>Claude Code</strong> · Kiro · ChatGPT — integrated into daily dev workflow</td>
+      </tr>
+      <tr>
+        <td>Dev tools</td>
+        <td>VS Code · GitHub · GitHub Desktop · GitHub Actions · <strong>AWS CDK</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <div class="footer-left">© 2025 Kris Brown · Nashville, TN</div>
+  <div class="footer-links">
+    <a href="https://github.com/krisbrw" target="_blank">GitHub</a>
+    <a href="https://github.com/krisbrw/kiwi-finance" target="_blank">Kiwi-Finance</a>
+    <a href="https://github.com/krisbrw/athenium" target="_blank">Athenium</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
