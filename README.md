@@ -1,20 +1,38 @@
-# Data Analyst
-#### Technical Skills: SQL, Viz, AWS, Python
-## Education
-### MBA, Project Management      University of North Alabama 
-### BBA, Management      Martin Methodist College (University of Tennessee Southern)
+# krisbrw.github.io
 
-## Professional Experience
-#### Business Analyst @ Amazon.com May 2022-Present
-##### Forecast, analyze, and lead business actions to lower weekly logistics cost.
-##### Review actual package volumes compared to forecast and root cause abnormal variance.
+Personal portfolio site for Kris Brown — live at [krisbrw.github.io](https://krisbrw.github.io).
 
-#### Area Manager @ Amazon.com May 2019-May 2022
-##### Managed Amazon Robotics floor for outbound picking process of 75-150 associates.
-##### Tested warehouse staffing placement configurations to reach optimal production rate. 
-##### Maintained time off and headcount of associates to make live changes to production plan.
+## About
 
-## Certifications
-### Microsoft Office Specialist: Excel Expert
-### Data Analytics Certificate Program - University of Texas
-### Amazon Web Services Cloud Practitioner
+Software developer based in Nashville, TN. Building data platforms, finance tools, and AI-powered products.
+
+## Projects
+
+| Project | Description | Repo |
+|---|---|---|
+| Kiwi-Finance | Personal finance app with real-time budget tracking | [github.com/krisbrw/kiwi-finance](https://github.com/krisbrw/kiwi-finance) |
+| Athenium | Nashville data platform — API ingestion + web scraping | [github.com/krisbrw/athenium](https://github.com/krisbrw/athenium) |
+
+## Stack
+
+HTML · CSS · JavaScript — static site hosted via GitHub Pages.
+
+## Local development
+
+No build step required. Open `index.html` directly in a browser, or use a simple local server:
+
+```bash
+# Using VS Code — install Live Server extension, then right-click index.html > Open with Live Server
+
+# Or using Python
+python -m http.server 8000
+# then visit http://localhost:8000
+```
+
+## Deployment
+
+Pushing to the `main` branch automatically deploys via GitHub Pages. Live within ~60 seconds of a push.
+
+## Contact
+
+- GitHub: [@krisbrw](https://github.com/krisbrw)
