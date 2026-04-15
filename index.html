@@ -3,24 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kris Brown — Developer</title>
+<title>Kris Brown — BI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #1a1a24;
-    --border: rgba(255,255,255,0.07);
-    --border-bright: rgba(255,255,255,0.15);
-    --text: #e8e8f0;
-    --muted: #6b6b80;
-    --accent: #7c6af7;
-    --accent2: #4fd1a5;
-    --accent3: #f7916a;
-    --glow: rgba(124,106,247,0.15);
+    --bg: #f7f8fc;
+    --bg2: #ffffff;
+    --bg3: #eef0f7;
+    --border: rgba(30,40,80,0.1);
+    --border-bright: rgba(30,40,80,0.22);
+    --text: #1a1f3c;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --accent2: #0ea5e9;
+    --accent3: #7c3aed;
+    --accent-soft: rgba(37,99,235,0.08);
+    --circuit: rgba(37,99,235,0.13);
   }
 
   html { scroll-behavior: smooth; }
@@ -29,20 +30,37 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
     overflow-x: hidden;
   }
 
-  /* noise overlay */
+  /* circuit board background */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image:
+      linear-gradient(var(--circuit) 1px, transparent 1px),
+      linear-gradient(90deg, var(--circuit) 1px, transparent 1px),
+      radial-gradient(circle, var(--circuit) 1.5px, transparent 1.5px);
+    background-size: 48px 48px, 48px 48px, 48px 48px;
+    background-position: 0 0, 0 0, 24px 24px;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
+    opacity: 0.55;
+  }
+
+  /* circuit node dots overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(37,99,235,0.18) 1.5px, transparent 1.5px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
   }
 
   /* NAV */
@@ -55,14 +73,14 @@
     justify-content: space-between;
     padding: 1.25rem 3rem;
     border-bottom: 1px solid var(--border);
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(247,248,252,0.88);
+    backdrop-filter: blur(14px);
   }
 
   .nav-logo {
     font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.05rem;
     letter-spacing: -0.02em;
     color: var(--text);
     text-decoration: none;
@@ -77,16 +95,15 @@
   }
 
   .nav-links a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
     color: var(--muted);
     text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 500;
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover { color: var(--accent); }
 
   /* HERO */
   .hero {
@@ -121,18 +138,18 @@
 
   .hero-title {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
     font-weight: 600;
-    line-height: 1.05;
+    line-height: 1.08;
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    color: var(--text);
     opacity: 0;
     animation: fadeUp 0.7s ease forwards 0.35s;
   }
 
   .hero-title .line2 {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+    color: var(--accent);
   }
 
   .hero-desc {
@@ -144,7 +161,7 @@
     animation: fadeUp 0.7s ease forwards 0.5s;
   }
 
-  .hero-desc strong { color: var(--text); font-weight: 400; }
+  .hero-desc strong { color: var(--text); font-weight: 500; }
 
   .hero-cta {
     display: flex;
@@ -175,9 +192,9 @@
   }
 
   .btn-primary:hover {
-    background: #9080ff;
+    background: #1d4ed8;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(124,106,247,0.35);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.28);
   }
 
   .btn-ghost {
@@ -187,8 +204,8 @@
   }
 
   .btn-ghost:hover {
-    color: var(--text);
-    border-color: rgba(255,255,255,0.3);
+    color: var(--accent);
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 
@@ -200,6 +217,7 @@
     overflow: hidden;
     opacity: 0;
     animation: fadeIn 0.9s ease forwards 0.5s;
+    box-shadow: 0 4px 32px rgba(30,40,80,0.08);
   }
 
   .terminal-bar {
@@ -232,13 +250,14 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     line-height: 2;
+    background: #fff;
   }
 
   .t-prompt { color: var(--accent2); }
   .t-cmd { color: var(--text); }
-  .t-comment { color: var(--muted); }
-  .t-key { color: var(--accent); }
-  .t-val { color: var(--accent3); }
+  .t-comment { color: #9ca3af; }
+  .t-key { color: var(--accent3); }
+  .t-val { color: var(--accent); }
   .t-accent { color: var(--accent); }
   .t-accent2 { color: var(--accent2); }
   .t-accent3 { color: var(--accent3); }
@@ -281,6 +300,7 @@
     letter-spacing: -0.025em;
     line-height: 1.15;
     margin-bottom: 3.5rem;
+    color: var(--text);
   }
 
   /* divider line */
@@ -306,7 +326,7 @@
     margin-bottom: 1.25rem;
   }
 
-  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
 
   .about-stats {
     display: grid;
@@ -316,6 +336,7 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 2px 16px rgba(30,40,80,0.06);
   }
 
   .stat-cell {
@@ -325,8 +346,8 @@
 
   .stat-num {
     font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-size: 2.2rem;
+    font-weight: 700;
     letter-spacing: -0.04em;
     color: var(--accent);
     line-height: 1;
@@ -357,6 +378,7 @@
     text-decoration: none;
     color: inherit;
     display: block;
+    box-shadow: 0 2px 12px rgba(30,40,80,0.05);
   }
 
   .project-card::before {
@@ -368,10 +390,10 @@
     border-radius: 12px;
   }
 
-  .project-card.kiwi::before { background: radial-gradient(ellipse at top left, rgba(79,209,165,0.08), transparent 60%); }
-  .project-card.athenium::before { background: radial-gradient(ellipse at top left, rgba(247,145,106,0.08), transparent 60%); }
+  .project-card.kiwi::before { background: radial-gradient(ellipse at top left, rgba(14,165,233,0.07), transparent 60%); }
+  .project-card.athenium::before { background: radial-gradient(ellipse at top left, rgba(124,58,237,0.07), transparent 60%); }
 
-  .project-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(37,99,235,0.1); }
   .project-card:hover::before { opacity: 1; }
 
   .project-tag {
@@ -385,15 +407,16 @@
     margin-bottom: 1.25rem;
   }
 
-  .tag-kiwi { background: rgba(79,209,165,0.12); color: var(--accent2); }
-  .tag-athenium { background: rgba(247,145,106,0.12); color: var(--accent3); }
+  .tag-kiwi { background: rgba(14,165,233,0.1); color: var(--accent2); }
+  .tag-athenium { background: rgba(124,58,237,0.1); color: var(--accent3); }
 
   .project-name {
     font-family: 'Inter', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     margin-bottom: 0.75rem;
+    color: var(--text);
   }
 
   .project-desc {
@@ -413,9 +436,9 @@
   .stack-pill {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
-    color: var(--muted);
-    background: var(--bg3);
-    border: 1px solid var(--border);
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(37,99,235,0.15);
     padding: 0.25rem 0.65rem;
     border-radius: 4px;
     letter-spacing: 0.04em;
@@ -453,7 +476,7 @@
   }
 
   .skills-table tr:last-child { border-bottom: none; }
-  .skills-table tr:hover { background: var(--bg2); }
+  .skills-table tr:hover { background: var(--accent-soft); }
 
   .skills-table td {
     padding: 1.1rem 1rem;
@@ -467,7 +490,7 @@
     text-transform: uppercase;
     color: var(--accent);
     white-space: nowrap;
-    width: 180px;
+    width: 200px;
     padding-left: 0;
   }
 
@@ -478,7 +501,7 @@
 
   .skills-table td:last-child strong {
     color: var(--text);
-    font-weight: 400;
+    font-weight: 500;
   }
 
   /* FOOTER */
@@ -491,6 +514,7 @@
     max-width: 100%;
     position: relative;
     z-index: 1;
+    background: var(--bg2);
   }
 
   .footer-left {
@@ -514,7 +538,7 @@
     transition: color 0.2s;
   }
 
-  .footer-links a:hover { color: var(--text); }
+  .footer-links a:hover { color: var(--accent); }
 
   /* SCROLL REVEAL */
   .reveal {
@@ -544,40 +568,6 @@
     50% { opacity: 0; }
   }
 
-  /* background glow blobs */
-  .blob {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.18;
-  }
-
-  .blob-1 {
-    width: 500px; height: 500px;
-    background: var(--accent);
-    top: -100px; left: -100px;
-    animation: drift1 18s ease-in-out infinite alternate;
-  }
-
-  .blob-2 {
-    width: 400px; height: 400px;
-    background: var(--accent2);
-    bottom: 20%; right: -80px;
-    animation: drift2 22s ease-in-out infinite alternate;
-  }
-
-  @keyframes drift1 {
-    from { transform: translate(0, 0); }
-    to { transform: translate(60px, 80px); }
-  }
-
-  @keyframes drift2 {
-    from { transform: translate(0, 0); }
-    to { transform: translate(-50px, -60px); }
-  }
-
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
@@ -593,9 +583,6 @@
 </head>
 <body>
 
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-
 <nav>
   <a href="#" class="nav-logo">kris<span>.</span>brown</a>
   <ul class="nav-links">
@@ -610,18 +597,17 @@
 <div class="hero">
   <div class="hero-grid">
     <div>
-      <p class="hero-eyebrow">Software Developer · Nashville, TN</p>
+      <p class="hero-eyebrow">BI Engineer · Data Analyst · Nashville, TN</p>
       <h1 class="hero-title">
-        Building things<br>
-        <span class="line2">that matter.</span>
+        Turning data into<br>
+        <span class="line2">decisions.</span>
       </h1>
       <p class="hero-desc">
-        I build <strong>data platforms</strong>, <strong>finance tools</strong>, and
-        <strong>AI-powered products</strong> — with a focus on clean architecture
-        and real-world utility.
+        I design <strong>data pipelines</strong>, build <strong>ETL workflows</strong>, and architect
+        <strong>AWS-native data solutions</strong> that help teams actually understand what's happening in their business.
       </p>
       <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#projects" class="btn btn-primary">See my work</a>
         <a href="https://github.com/krisbrw" target="_blank" class="btn btn-ghost">GitHub ↗</a>
       </div>
     </div>
@@ -647,36 +633,33 @@
 <!-- ABOUT -->
 <section id="about">
   <p class="section-label reveal">About me</p>
-  <h2 class="section-title reveal">Developer. Builder.<br>Nashville native.</h2>
+  <h2 class="section-title reveal">Data person.<br>Nashville native.</h2>
   <div class="about-grid">
     <div class="about-text reveal">
       <p>
-        I'm a software developer based in <strong>Nashville, TN</strong>, building
-        full-stack applications across web, mobile, and cloud infrastructure.
-        My work sits at the intersection of <strong>data engineering</strong>,
-        <strong>product development</strong>, and <strong>AI tooling</strong>.
+        Hey! I'm Kris — a <strong>Business Intelligence Engineer</strong> and data analyst based in Nashville, TN.
+        I love the full journey from raw data to real insight: writing the SQL, building the pipeline,
+        designing the architecture, and making sure the right people can actually use what comes out the other end.
       </p>
       <p>
-        I'm currently developing <strong>Kiwi-Finance</strong>, a personal finance
-        app with real-time budget tracking, and <strong>Athenium</strong>, a
-        Nashville data platform that ingests and exposes local data as a
-        commercial product.
+        My day-to-day lives in <strong>SQL, Python, and AWS</strong> — building ETL pipelines, designing data models,
+        and wiring up services like Glue, Lambda, Redshift, and S3 into something that just works.
+        I care a lot about clean architecture and data that people can trust.
       </p>
       <p>
-        I build across the full stack — React Native for mobile, Node.js and
-        Python on the backend, PostgreSQL for data, and AWS for infrastructure.
-        I use <strong>Claude Code</strong> and <strong>Kiro</strong> as part of
-        my development workflow.
+        Right now I'm building <strong>Athenium</strong>, a Nashville data platform that ingests local open data
+        and exposes it as a commercial product, and <strong>Kiwi-Finance</strong>, a personal finance app
+        with real-time transaction tracking powered by Plaid.
       </p>
     </div>
     <div class="about-stats reveal">
       <div class="stat-cell">
-        <div class="stat-num">3</div>
-        <div class="stat-label">active projects</div>
+        <div class="stat-num">SQL</div>
+        <div class="stat-label">primary language</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-num">6+</div>
-        <div class="stat-label">languages & frameworks</div>
+        <div class="stat-num">ETL</div>
+        <div class="stat-label">pipelines & workflows</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">AWS</div>
@@ -698,22 +681,22 @@
   <h2 class="section-title reveal">Projects</h2>
   <div class="projects-grid">
 
-    <a class="project-card kiwi reveal" href="https://github.com/krisbrw/kiwi-finance" target="_blank">
-      <span class="project-tag tag-kiwi">Finance · Mobile · Web</span>
-      <h3 class="project-name">Kiwi-Finance</h3>
+    <a class="project-card athenium reveal" href="https://github.com/krisbrw/athenium" target="_blank">
+      <span class="project-tag tag-athenium">Data Platform · ETL · API</span>
+      <h3 class="project-name">Athenium</h3>
       <p class="project-desc">
-        Personal finance app with real-time budget tracking across bank accounts.
-        Plaid API integration for automatic transaction sync, WebSocket-powered
-        live budget updates, and a React Native Android app alongside a React web app.
+        Nashville data platform — named for the city's nickname, the Athens of the South.
+        Ingests Nashville open data via APIs and web scraping, runs ETL pipelines to enrich and normalize it,
+        and exposes the datasets as a commercial data product via a REST API.
       </p>
       <div class="project-stack">
-        <span class="stack-pill">React Native</span>
-        <span class="stack-pill">React.js</span>
-        <span class="stack-pill">Node.js</span>
+        <span class="stack-pill">Python</span>
         <span class="stack-pill">PostgreSQL</span>
-        <span class="stack-pill">Plaid API</span>
         <span class="stack-pill">AWS Lambda</span>
-        <span class="stack-pill">AWS Cognito</span>
+        <span class="stack-pill">S3</span>
+        <span class="stack-pill">AWS Glue</span>
+        <span class="stack-pill">REST API</span>
+        <span class="stack-pill">Stripe</span>
       </div>
       <span class="project-link">
         View on GitHub
@@ -723,22 +706,22 @@
       </span>
     </a>
 
-    <a class="project-card athenium reveal" href="https://github.com/krisbrw/athenium" target="_blank">
-      <span class="project-tag tag-athenium">Data · Analytics · API</span>
-      <h3 class="project-name">Athenium</h3>
+    <a class="project-card kiwi reveal" href="https://github.com/krisbrw/kiwi-finance" target="_blank">
+      <span class="project-tag tag-kiwi">Finance · Data · Mobile</span>
+      <h3 class="project-name">Kiwi-Finance</h3>
       <p class="project-desc">
-        Nashville data platform — named for the city's nickname, the Athens of the South.
-        Combines API ingestion from Nashville open data sources with web scraping
-        for rent prices, exposing enriched datasets as a commercial data product.
+        Personal finance app with real-time budget tracking across bank accounts.
+        Plaid API integration for automatic transaction sync, a PostgreSQL data model
+        for financial records, and WebSocket-powered live updates across web and Android.
       </p>
       <div class="project-stack">
-        <span class="stack-pill">Python</span>
+        <span class="stack-pill">React Native</span>
         <span class="stack-pill">Node.js</span>
         <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">Plaid API</span>
         <span class="stack-pill">AWS Lambda</span>
-        <span class="stack-pill">S3</span>
-        <span class="stack-pill">REST API</span>
-        <span class="stack-pill">Stripe</span>
+        <span class="stack-pill">AWS Cognito</span>
+        <span class="stack-pill">WebSockets</span>
       </div>
       <span class="project-link">
         View on GitHub
@@ -760,36 +743,32 @@
   <table class="skills-table reveal">
     <tbody>
       <tr>
-        <td>Languages</td>
-        <td><strong>JavaScript</strong> · TypeScript · <strong>Python</strong> · <strong>SQL</strong> · HTML · CSS</td>
+        <td>Query & Analysis</td>
+        <td><strong>SQL</strong> (advanced) · window functions · CTEs · query optimization · <strong>Python</strong> · Pandas · Jupyter</td>
       </tr>
       <tr>
-        <td>Frontend</td>
-        <td><strong>React.js</strong> · <strong>React Native</strong> (Android-first)</td>
-      </tr>
-      <tr>
-        <td>Backend</td>
-        <td><strong>Node.js</strong> · Express · REST APIs · WebSockets</td>
-      </tr>
-      <tr>
-        <td>Database</td>
-        <td><strong>PostgreSQL</strong> · AWS RDS · schema design · SQL migrations</td>
+        <td>Data Engineering</td>
+        <td><strong>ETL pipeline design</strong> · data modeling · schema design · <strong>AWS Glue</strong> · EventBridge · Lambda</td>
       </tr>
       <tr>
         <td>Cloud — AWS</td>
-        <td><strong>Lambda</strong> · <strong>RDS</strong> · <strong>S3</strong> · API Gateway · Cognito · Secrets Manager · EventBridge</td>
+        <td><strong>S3</strong> · <strong>RDS</strong> · <strong>Redshift</strong> · Lambda · Glue · API Gateway · Secrets Manager · CDK</td>
       </tr>
       <tr>
-        <td>Data</td>
-        <td>Web scraping · API ingestion · data pipelines · Jupyter · Pandas</td>
+        <td>Databases</td>
+        <td><strong>PostgreSQL</strong> · AWS RDS · Redshift · data warehousing · migrations</td>
+      </tr>
+      <tr>
+        <td>Architecture</td>
+        <td>Data pipeline architecture · API ingestion · web scraping · event-driven design</td>
+      </tr>
+      <tr>
+        <td>Development</td>
+        <td><strong>JavaScript</strong> · Node.js · React · REST APIs · GitHub Actions · VS Code</td>
       </tr>
       <tr>
         <td>AI tooling</td>
-        <td><strong>Claude Code</strong> · Kiro · ChatGPT — integrated into daily dev workflow</td>
-      </tr>
-      <tr>
-        <td>Dev tools</td>
-        <td>VS Code · GitHub · GitHub Desktop · GitHub Actions · <strong>AWS CDK</strong></td>
+        <td><strong>Claude Code</strong> · Kiro · ChatGPT — part of the daily workflow, not a crutch</td>
       </tr>
     </tbody>
   </table>
@@ -822,33 +801,39 @@
     {
       cmd: 'whoami',
       output: [
-        '<span class="t-val">kris brown</span> <span class="t-comment">// software developer, nashville tn</span>'
+        '<span class="t-val">kris brown</span> <span class="t-comment">// bi engineer · data analyst · nashville tn</span>'
       ]
     },
     {
-      cmd: 'ls projects/',
+      cmd: 'psql -c "SELECT expertise FROM kris LIMIT 3;"',
       output: [
-        '<span class="t-accent2">kiwi-finance/</span>   <span class="t-accent3">athenium/</span>   <span class="t-muted">...</span>'
+        '<span class="t-comment">      expertise</span>',
+        '<span class="t-accent2">─────────────────────────</span>',
+        '<span class="t-val"> SQL & data modeling</span>',
+        '<span class="t-val"> ETL pipeline design</span>',
+        '<span class="t-val"> AWS data architecture</span>'
       ]
     },
     {
-      cmd: 'cat stack.json | jq .languages',
+      cmd: 'aws s3 ls s3://athenium-nashville-data/',
       output: [
-        '<span class="t-val">"JavaScript · TypeScript · Python · SQL"</span>'
+        '<span class="t-comment">2025-04-12</span> <span class="t-val">permits_enriched.parquet</span>',
+        '<span class="t-comment">2025-04-12</span> <span class="t-val">rent_prices_normalized.parquet</span>',
+        '<span class="t-comment">2025-04-12</span> <span class="t-val">demographics_joined.parquet</span>'
       ]
     },
     {
       cmd: 'git log --oneline -3',
       output: [
-        '<span class="t-accent">a3f91c2</span> <span class="t-comment">feat: plaid webhook sync for kiwi</span>',
-        '<span class="t-accent">7d02e1a</span> <span class="t-comment">feat: athenium rent scraper pipeline</span>',
-        '<span class="t-accent">c8b44f0</span> <span class="t-comment">chore: aws lambda deploy config</span>'
+        '<span class="t-accent">b2e91c4</span> <span class="t-comment">feat: athenium glue etl job for permits</span>',
+        '<span class="t-accent">7d02e1a</span> <span class="t-comment">feat: rent scraper pipeline + s3 sink</span>',
+        '<span class="t-accent">c8b44f0</span> <span class="t-comment">chore: redshift schema migration v3</span>'
       ]
     },
     {
-      cmd: 'echo $LOCATION',
+      cmd: 'echo $STACK',
       output: [
-        '<span class="t-val">Nashville, TN</span>'
+        '<span class="t-val">SQL · Python · AWS · PostgreSQL · ETL</span>'
       ]
     }
   ];
