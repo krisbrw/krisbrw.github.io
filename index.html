@@ -66,25 +66,24 @@
   .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-bright); }
   .btn-ghost:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
-  /* TERMINAL */
-  .hero-terminal { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; opacity: 0; animation: fadeIn 0.9s ease forwards 0.5s; box-shadow: 0 4px 24px rgba(30,40,80,0.08); }
-  .terminal-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.1rem; border-bottom: 1px solid var(--border); background: var(--bg3); }
-  .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .terminal-dot:nth-child(1) { background: #ff5f57; }
-  .terminal-dot:nth-child(2) { background: #febc2e; }
-  .terminal-dot:nth-child(3) { background: #28c840; }
-  .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-left: 0.5rem; }
-  .terminal-body { padding: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 1.9; background: #fff; min-height: 180px; }
-  .t-prompt { color: var(--accent2); }
-  .t-cmd { color: var(--text); }
-  .t-comment { color: #9ca3af; }
-  .t-val { color: var(--accent); }
-  .t-accent { color: var(--accent); }
-  .t-accent2 { color: var(--accent2); }
-  .t-accent3 { color: var(--accent3); }
-  .t-muted { color: var(--muted); }
-  .t-cursor { display: inline-block; width: 7px; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s step-end infinite; }
-  .terminal-input-line { display: flex; align-items: baseline; }
+  /* DASHBOARD */
+  .hero-dashboard { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; opacity: 0; animation: fadeIn 0.9s ease forwards 0.5s; box-shadow: 0 4px 24px rgba(30,40,80,0.08); }
+  .dashboard-header { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg3); }
+  .dashboard-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+  .dashboard-status { display: flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #28c840; animation: pulse 2s ease-in-out infinite; }
+  .dashboard-body { padding: 1.2rem; background: #fff; }
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
+  .metric-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 0.9rem; }
+  .metric-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+  .metric-value { font-size: 1.4rem; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .metric-change { font-size: 0.68rem; color: #10b981; margin-top: 0.2rem; }
+  .chart-container { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem; }
+  .chart-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 0.5rem; height: 80px; }
+  .chart-bar { flex: 1; background: linear-gradient(to top, var(--accent), var(--accent2)); border-radius: 3px 3px 0 0; transition: all 0.4s ease; position: relative; }
+  .chart-bar::after { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: var(--accent2); border-radius: 50%; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   /* SECTIONS */
   section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 3rem 3rem; }
@@ -207,17 +206,30 @@
         <a href="https://github.com/krisbrw" target="_blank" class="btn btn-ghost">GitHub &nearr;</a>
       </div>
     </div>
-    <div class="hero-terminal">
-      <div class="terminal-bar">
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <span class="terminal-title">krisbrw ~ bash</span>
+    <div class="hero-dashboard">
+      <div class="dashboard-header">
+        <div class="dashboard-title">Pipeline Monitor</div>
+        <div class="dashboard-status">
+          <span class="status-dot"></span>
+          <span>Live</span>
+        </div>
       </div>
-      <div class="terminal-body" id="terminal-body">
-        <div id="terminal-lines"></div>
-        <div class="terminal-input-line">
-          <span class="t-prompt">$ </span><span id="terminal-typing"></span><span class="t-cursor"></span>
+      <div class="dashboard-body">
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-label">Rows Processed</div>
+            <div class="metric-value" id="metric-rows">0</div>
+            <div class="metric-change">↑ 12.4% vs yesterday</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Active Pipelines</div>
+            <div class="metric-value" id="metric-pipelines">0</div>
+            <div class="metric-change">↑ 3 new today</div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-label">Query Performance (ms)</div>
+          <div class="chart-bars" id="chart-bars"></div>
         </div>
       </div>
     </div>
@@ -576,42 +588,70 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Typewriter terminal
-  const sessions = [
-    { cmd: 'whoami', output: ['<span class="t-val">kris brown</span> <span class="t-comment">// bi engineer, nashville tn</span>'] },
-    { cmd: 'psql -c "SELECT expertise FROM kris LIMIT 3;"', output: ['<span class="t-comment">      expertise       </span>', '<span class="t-accent2">-----------------------</span>', '<span class="t-val"> SQL & data modeling</span>', '<span class="t-val"> ETL pipeline design</span>', '<span class="t-val"> AWS data architecture</span>'] },
-    { cmd: 'aws s3 ls s3://athenium-nashville-data/', output: ['<span class="t-comment">2025-04-12</span> <span class="t-val">permits_enriched.parquet</span>', '<span class="t-comment">2025-04-12</span> <span class="t-val">rent_prices_normalized.parquet</span>', '<span class="t-comment">2025-04-12</span> <span class="t-val">demographics_joined.parquet</span>'] },
-    { cmd: 'git log --oneline -3', output: ['<span class="t-accent">b2e91c4</span> <span class="t-comment">feat: athenium glue etl job for permits</span>', '<span class="t-accent">7d02e1a</span> <span class="t-comment">feat: rent scraper pipeline + s3 sink</span>', '<span class="t-accent">c8b44f0</span> <span class="t-comment">chore: redshift schema migration v3</span>'] },
-    { cmd: 'echo $STACK', output: ['<span class="t-val">SQL &middot; Python &middot; AWS &middot; PostgreSQL &middot; ETL</span>'] }
-  ];
-
-  const typingEl = document.getElementById('terminal-typing');
-  const linesEl = document.getElementById('terminal-lines');
-  let sessionIdx = 0;
-  const MAX_LINES = 8;
-
-  function addLines(lines) {
-    lines.forEach(l => { const d = document.createElement('div'); d.innerHTML = l; linesEl.appendChild(d); });
-    while (linesEl.children.length > MAX_LINES) linesEl.removeChild(linesEl.firstChild);
-  }
-  function addCmd(cmd) {
-    const d = document.createElement('div');
-    d.innerHTML = '<span class="t-prompt">$ </span><span class="t-cmd">' + cmd + '</span>';
-    linesEl.appendChild(d);
-    while (linesEl.children.length > MAX_LINES) linesEl.removeChild(linesEl.firstChild);
-  }
-  function type(cmd, cb) {
-    typingEl.textContent = ''; let i = 0;
-    const iv = setInterval(() => { typingEl.textContent += cmd[i++]; if (i >= cmd.length) { clearInterval(iv); cb(); } }, 52);
-  }
-  function erase(cb) {
-    const iv = setInterval(() => { const t = typingEl.textContent; if (!t.length) { clearInterval(iv); cb(); return; } typingEl.textContent = t.slice(0,-1); }, 16);
-  }
-  function run() {
-    const s = sessions[sessionIdx++ % sessions.length];
-    type(s.cmd, () => setTimeout(() => { addCmd(s.cmd); typingEl.textContent = ''; addLines(s.output); setTimeout(() => erase(() => setTimeout(run, 800)), 2000); }, 350));
-  }
-  setTimeout(run, 1000);
+  // Live Dashboard
+  (function() {
+    const rowsEl = document.getElementById('metric-rows');
+    const pipelinesEl = document.getElementById('metric-pipelines');
+    const chartBars = document.getElementById('chart-bars');
+    
+    // Animate counter
+    function animateValue(el, start, end, duration) {
+      const range = end - start;
+      const increment = range / (duration / 16);
+      let current = start;
+      const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+          current = end;
+          clearInterval(timer);
+        }
+        el.textContent = Math.floor(current).toLocaleString();
+      }, 16);
+    }
+    
+    // Initialize bars
+    const barCount = 12;
+    for (let i = 0; i < barCount; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'chart-bar';
+      bar.style.height = '0%';
+      chartBars.appendChild(bar);
+    }
+    
+    // Animate metrics on load
+    setTimeout(() => {
+      animateValue(rowsEl, 0, 2847392, 2000);
+      animateValue(pipelinesEl, 0, 47, 1500);
+    }, 800);
+    
+    // Animate bars
+    const bars = chartBars.querySelectorAll('.chart-bar');
+    setTimeout(() => {
+      bars.forEach((bar, i) => {
+        setTimeout(() => {
+          const height = Math.random() * 60 + 30;
+          bar.style.height = height + '%';
+        }, i * 80);
+      });
+    }, 1200);
+    
+    // Update bars periodically
+    setInterval(() => {
+      bars.forEach((bar, i) => {
+        setTimeout(() => {
+          const height = Math.random() * 60 + 30;
+          bar.style.height = height + '%';
+        }, i * 60);
+      });
+    }, 3000);
+    
+    // Update metrics periodically
+    setInterval(() => {
+      const currentRows = parseInt(rowsEl.textContent.replace(/,/g, ''));
+      const newRows = currentRows + Math.floor(Math.random() * 5000 + 1000);
+      animateValue(rowsEl, currentRows, newRows, 800);
+    }, 5000);
+  })();
 </script>
 
 </body>
