@@ -52,38 +52,123 @@
   .nav-links a:hover { color: var(--accent); }
 
   /* HERO */
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 3rem 3rem; position: relative; z-index: 1; }
-  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; max-width: 1100px; width: 100%; margin: 0 auto; align-items: center; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 3rem 3rem; position: relative; z-index: 1; }
+  .hero-content { text-align: center; max-width: 700px; margin-bottom: 3rem; }
   .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s; }
   .hero-title { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.2rem; color: var(--text); opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s; }
   .hero-title .line2 { color: var(--accent); }
-  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 420px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s; }
+  .hero-desc { font-size: 1rem; color: var(--muted); margin: 0 auto 2rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s; }
   .hero-desc strong { color: var(--text); font-weight: 500; }
-  .hero-cta { display: flex; gap: 0.75rem; opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s; }
+  .hero-cta { display: flex; gap: 0.75rem; justify-content: center; opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s; }
   .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1.5rem; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
   .btn-primary { background: var(--accent); color: #fff; }
   .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.28); }
   .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-bright); }
   .btn-ghost:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
-  /* DASHBOARD */
-  .hero-dashboard { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; opacity: 0; animation: fadeIn 0.9s ease forwards 0.5s; box-shadow: 0 4px 24px rgba(30,40,80,0.08); }
+  /* COLLAGE WIDGET */
+  .hero-dashboard { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; opacity: 0; animation: fadeIn 0.9s ease forwards 0.5s; box-shadow: 0 4px 24px rgba(30,40,80,0.08); max-width: 1100px; width: 100%; }
   .dashboard-header { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border); background: var(--bg3); }
   .dashboard-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
   .dashboard-status { display: flex; align-items: center; gap: 0.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #28c840; animation: pulse 2s ease-in-out infinite; }
-  .dashboard-body { padding: 1.2rem; background: #fff; }
-  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
-  .metric-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 0.9rem; }
-  .metric-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
-  .metric-value { font-size: 1.4rem; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
-  .metric-change { font-size: 0.68rem; color: #10b981; margin-top: 0.2rem; }
-  .chart-container { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem; }
-  .chart-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
-  .chart-bars { display: flex; align-items: flex-end; gap: 0.5rem; height: 80px; }
-  .chart-bar { flex: 1; background: linear-gradient(to top, var(--accent), var(--accent2)); border-radius: 3px 3px 0 0; transition: all 0.4s ease; position: relative; }
-  .chart-bar::after { content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: var(--accent2); border-radius: 50%; }
+  
+  .collage-grid { 
+    display: grid; 
+    grid-template-columns: repeat(6, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 2px; 
+    padding: 0.4rem; 
+    background: #fff; 
+    height: 440px; 
+  }
+  .collage-item { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  
+  /* Custom sizes for each panel */
+  .collage-item:nth-child(1) { grid-column: 2 / 4; grid-row: 1 / 4; } /* Dashboard - narrower center */
+  .collage-item:nth-child(2) { grid-column: 1 / 2; grid-row: 1 / 3; display: flex; flex-direction: column; } /* SQL - top left, spans 2 rows */
+  .collage-item:nth-child(3) { grid-column: 4 / 7; grid-row: 1 / 2; } /* System - wide top right */
+  .collage-item:nth-child(4) { grid-column: 4 / 7; grid-row: 2 / 4; } /* Code - tall right */
+  .collage-item:nth-child(5) { grid-column: 1 / 2; grid-row: 3 / 4; display: flex; flex-direction: column; padding-top: 0; margin-top: -60px; } /* API - bottom row, shifted up */
+  
+  .collage-label { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.05em; font-weight: 600; }
+  
+  /* Dashboard mini */
+  .mini-metric { text-align: center; margin-bottom: 0.4rem; }
+  .mini-value { font-size: 1.8rem; font-weight: 600; color: var(--accent); font-family: 'JetBrains Mono', monospace; line-height: 1; }
+  .mini-sublabel { font-size: 0.5rem; color: var(--muted); margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
+  .mini-bars { display: flex; gap: 12px; flex: 1; align-items: flex-end; margin-bottom: 0.3rem; justify-content: space-between; max-width: 100%; padding: 0 1rem; min-height: 100px; position: relative; }
+  .mini-bar { width: 50px; max-width: 50px; background: linear-gradient(to top, var(--accent), var(--accent2)); border-radius: 3px 3px 0 0; transition: height 0.3s; box-shadow: 0 2px 8px rgba(37,99,235,0.2); position: relative; }
+  .bar-value { position: absolute; top: -1.2rem; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .mini-bar-labels { display: flex; justify-content: space-between; gap: 12px; font-size: 0.45rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; max-width: 100%; padding: 0 1rem; }
+  .mini-bar-labels span { width: 50px; text-align: center; }
+  .mini-legend { font-size: 0.5rem; color: var(--muted); text-align: center; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.2rem; }
+  
+  /* SQL mini */
+  .mini-sql { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; line-height: 1.5; color: #d4d4d4; background: #1e1e1e; padding: 0.5rem; border-radius: 4px; overflow: visible; margin-bottom: 0.3rem; }
+  .sql-keyword { color: #569cd6; font-weight: 500; }
+  .sql-string { color: #ce9178; }
+  .sql-function { color: #dcdcaa; }
+  .sql-results { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-top: 0.3rem; }
+  .sql-table { width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 0.45rem; border-collapse: collapse; }
+  .sql-table th { background: var(--bg3); padding: 0.25rem 0.3rem; text-align: left; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); }
+  .sql-table td { padding: 0.25rem 0.3rem; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .sql-table tr:last-child td { border-bottom: none; }
+  .sql-status { display: flex; align-items: center; gap: 0.3rem; font-size: 0.48rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .status-indicator { width: 5px; height: 5px; border-radius: 50%; background: #28c840; animation: pulse 2s ease-in-out infinite; }
+  
+  /* Metrics mini */
+  .mini-gauge-container { display: flex; flex-direction: column; gap: 1rem; flex: 1; justify-content: center; padding: 0.3rem 0; }
+  .mini-gauge-item { display: flex; align-items: center; gap: 0.6rem; }
+  .mini-gauge-wrapper { position: relative; flex-shrink: 0; }
+  .mini-gauge-circle { width: 45px; height: 45px; border-radius: 50%; border: 3px solid var(--bg3); position: relative; }
+  .mini-gauge-fill { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--accent); border-right-color: transparent; border-bottom-color: transparent; transform: rotate(0deg); transition: transform 0.5s; }
+  .mini-gauge-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 600; color: var(--text); font-family: 'JetBrains Mono', monospace; }
+  .mini-gauge-label { flex: 1; }
+  .mini-gauge-text { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--text); font-weight: 600; margin-bottom: 0.05rem; }
+  .mini-gauge-subtext { font-size: 0.48rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  
+  /* VS Code mini - now AWS Lambda console style */
+  .mini-vscode { background: #fff; border-radius: 4px; flex: 1; overflow: hidden; display: grid; grid-template-columns: 180px 1fr; grid-template-rows: auto auto auto 1fr; border: 1px solid #d5dbdb; }
+  .lambda-explorer { grid-column: 1; grid-row: 1 / 5; background: #f7f7f7; border-right: 1px solid #d5dbdb; padding: 0.5rem; font-size: 0.48rem; }
+  .explorer-title { font-weight: 600; color: #000; margin-bottom: 0.4rem; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .explorer-item { padding: 0.25rem 0.3rem; color: #545b64; display: flex; align-items: center; gap: 0.3rem; border-radius: 3px; margin-bottom: 2px; }
+  .explorer-item.active { background: #e3f2fd; color: #0073bb; }
+  .explorer-icon { font-size: 0.5rem; }
+  .lambda-header { grid-column: 2; grid-row: 1; background: #fafafa; padding: 0.5rem 0.6rem; border-bottom: 1px solid #d5dbdb; display: flex; align-items: center; gap: 0.4rem; }
+  .lambda-icon { width: 20px; height: 20px; background: #FF9900; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.7rem; font-weight: 700; }
+  .lambda-title { font-size: 0.55rem; font-weight: 600; color: #000; }
+  .lambda-meta { font-size: 0.48rem; color: #545b64; margin-left: auto; }
+  .lambda-tabs { grid-column: 2; grid-row: 2; background: #fff; padding: 0.4rem 0.6rem; border-bottom: 1px solid #d5dbdb; display: flex; align-items: center; gap: 0.6rem; }
+  .lambda-tab { font-size: 0.5rem; color: #545b64; padding: 0.3rem 0; border-bottom: 2px solid transparent; font-weight: 500; cursor: pointer; }
+  .lambda-tab.active { color: #0073bb; border-bottom-color: #0073bb; }
+  .vscode-tabs { grid-column: 2; grid-row: 3; background: #fff; padding: 0.4rem 0.6rem; border-bottom: 1px solid #d5dbdb; display: flex; align-items: center; gap: 0.4rem; }
+  .vscode-tab { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.6rem; font-family: 'Amazon Ember', 'Helvetica Neue', sans-serif; font-size: 0.5rem; color: #545b64; background: transparent; border-bottom: 2px solid transparent; font-weight: 500; }
+  .vscode-tab.active { color: #0073bb; border-bottom-color: #0073bb; }
+  .mini-code { grid-column: 2; grid-row: 4; font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; line-height: 1.6; color: #000; padding: 0.6rem; overflow: auto; background: #fff; }
+  .py-keyword { color: #0033b3; font-weight: 600; }
+  .py-function { color: #00627a; }
+  .py-string { color: #067d17; }
+  .py-number { color: #1750eb; }
+  .py-comment { color: #8c8c8c; font-style: italic; }
+  .code-cursor { display: inline-block; width: 2px; height: 1em; background: #fff; animation: blink 1s step-end infinite; }
+  
+  /* API mini */
+  .mini-api { background: #1e1e1e; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; padding: 0.5rem; flex: 1; }
+  .api-header { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.4rem; }
+  .api-method { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; font-weight: 600; color: #28c840; background: rgba(40,200,64,0.1); padding: 0.12rem 0.3rem; border-radius: 3px; }
+  .api-endpoint { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: #9cdcfe; }
+  .mini-json { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; line-height: 1.6; color: #d4d4d4; overflow: visible; flex: 1; }
+  .api-footer { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--muted); margin-top: 0.4rem; text-align: right; }
+  .json-key { color: #9cdcfe; }
+  .json-string { color: #ce9178; }
+  .json-number { color: #b5cea8; }
+  .json-key { color: #9cdcfe; }
+  .json-string { color: #ce9178; }
+  .json-number { color: #b5cea8; }
+  
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   /* SECTIONS */
   section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 3rem 3rem; }
@@ -170,7 +255,7 @@
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
   @media (max-width: 900px) { .aws-grid { grid-template-columns: repeat(2, 1fr); } .about-grid { grid-template-columns: 1fr; } .about-photo { width: 100%; height: 160px; } }
-  @media (max-width: 768px) { nav { padding: 0.9rem 1.5rem; } .nav-links { display: none; } .hero { padding: 5rem 1.5rem 2.5rem; } .hero-grid { grid-template-columns: 1fr; } .hero-terminal { display: none; } section { padding: 2.5rem 1.5rem; } .projects-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; } .footer-socials { justify-content: flex-start; } .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; } }
+  @media (max-width: 768px) { nav { padding: 0.9rem 1.5rem; } .nav-links { display: none; } .hero { padding: 5rem 1.5rem 2.5rem; } .hero-dashboard { display: none; } section { padding: 2.5rem 1.5rem; } .projects-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; } .footer-socials { justify-content: flex-start; } .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; } }
 </style>
 </head>
 <body>
@@ -190,8 +275,9 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-grid">
-    <div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1100px; width: 100%; align-items: start;">
+    <!-- Left: Hero content -->
+    <div class="hero-content" style="text-align: left; margin-bottom: 0;">
       <p class="hero-eyebrow">BI Engineer &middot; Data Analyst &middot; Nashville, TN</p>
       <h1 class="hero-title">
         Turning data into<br>
@@ -206,30 +292,183 @@
         <a href="https://github.com/krisbrw" target="_blank" class="btn btn-ghost">GitHub &nearr;</a>
       </div>
     </div>
-    <div class="hero-dashboard">
-      <div class="dashboard-header">
-        <div class="dashboard-title">Pipeline Monitor</div>
-        <div class="dashboard-status">
-          <span class="status-dot"></span>
-          <span>Live</span>
+    
+    <!-- Right: About section -->
+    <div style="opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;">
+      <p class="section-label">About me</p>
+      <h2 class="section-title" style="margin-bottom: 1rem; font-size: 1.5rem;">Data person. Nashville native.</h2>
+      <div style="display: flex; gap: 1rem; align-items: start;">
+        <div class="about-photo" style="width: 100px; height: 120px; flex-shrink: 0;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span style="font-size: 0.6rem;">your photo<br>goes here</span>
+        </div>
+        <div style="color: var(--muted); font-size: 0.8rem; line-height: 1.6; flex: 1;">
+          <p style="margin-bottom: 0.7rem;">
+            Hey! I&rsquo;m Kris &mdash; a <strong style="color: var(--text); font-weight: 500;">Business Intelligence Engineer</strong> and data analyst based in Nashville, TN.
+            I love the full journey from raw data to real insight: writing the SQL, building the pipeline,
+            designing the architecture, and making sure the right people can actually use what comes out the other end.
+          </p>
+          <p style="margin-bottom: 0.7rem;">
+            My day-to-day lives in <strong style="color: var(--text); font-weight: 500;">SQL, Python, and AWS</strong> &mdash; building ETL pipelines, designing data models,
+            and wiring up services like Glue, Lambda, Redshift, and S3 into something that just works.
+          </p>
         </div>
       </div>
-      <div class="dashboard-body">
-        <div class="metric-grid">
-          <div class="metric-card">
-            <div class="metric-label">Rows Processed</div>
-            <div class="metric-value" id="metric-rows">0</div>
-            <div class="metric-change">↑ 12.4% vs yesterday</div>
+    </div>
+  </div>
+  
+  <div class="hero-dashboard" style="margin-top: 3rem;">
+    <div class="dashboard-header">
+      <div class="dashboard-title">Data Engineering Workspace</div>
+      <div class="dashboard-status">
+        <span class="status-dot"></span>
+        <span>Live</span>
+      </div>
+    </div>
+    <div class="collage-grid">
+      <!-- Dashboard - large center -->
+      <div class="collage-item">
+        <div class="collage-label" style="font-size: 1.5rem;">Sales</div>
+        <div style="text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; margin-top: 0.5rem;" id="year-display">2025</div>
+        <div class="mini-bars" id="mini-bars"></div>
+        <div class="mini-bar-labels">
+          <span>Q1</span>
+          <span>Q2</span>
+          <span>Q3</span>
+          <span>Q4</span>
+        </div>
+      </div>
+      
+      <!-- SQL - top left, spans 2 rows -->
+      <div class="collage-item">
+        <div class="collage-label">SQL Editor</div>
+        <div class="mini-sql" id="mini-sql"></div>
+        <div class="sql-results">
+          <table class="sql-table">
+            <thead>
+              <tr>
+                <th>name</th>
+                <th>orders</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice Johnson</td>
+                <td>47</td>
+              </tr>
+              <tr>
+                <td>Bob Smith</td>
+                <td>32</td>
+              </tr>
+              <tr>
+                <td>Carol Davis</td>
+                <td>28</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sql-status">
+          <span class="status-indicator"></span>
+          <span>Query complete • 3 rows</span>
+        </div>
+      </div>
+      
+      <!-- System - wide top right -->
+      <div class="collage-item" style="overflow: hidden;">
+        <div class="collage-label">System Health</div>
+        <div style="display: flex; gap: 0.4rem; flex: 1; align-items: stretch; padding: 0.2rem 0;">
+          <!-- Uptime gauge -->
+          <div style="flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 0.3rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="mini-gauge-wrapper">
+              <div class="mini-gauge-circle" style="width: 35px; height: 35px; border-width: 2px;">
+                <div class="mini-gauge-fill" id="gauge-1" style="border-width: 2px;"></div>
+              </div>
+              <div class="mini-gauge-center" style="font-size: 0.5rem;">99.9</div>
+            </div>
+            <div style="font-size: 0.45rem; font-weight: 600; color: var(--text); margin-top: 0.2rem;">Uptime</div>
           </div>
-          <div class="metric-card">
-            <div class="metric-label">Active Pipelines</div>
-            <div class="metric-value" id="metric-pipelines">0</div>
-            <div class="metric-change">↑ 3 new today</div>
+          
+          <!-- Records gauge -->
+          <div style="flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 0.3rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="mini-gauge-wrapper">
+              <div class="mini-gauge-circle" style="width: 35px; height: 35px; border-width: 2px;">
+                <div class="mini-gauge-fill" id="gauge-2" style="border-width: 2px;"></div>
+              </div>
+              <div class="mini-gauge-center" style="font-size: 0.5rem;">85M</div>
+            </div>
+            <div style="font-size: 0.45rem; font-weight: 600; color: var(--text); margin-top: 0.2rem;">Records</div>
+          </div>
+          
+          <!-- Queries -->
+          <div style="flex: 1.5; background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%); border-radius: 4px; padding: 0.4rem; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff;">
+            <div style="font-size: 1.2rem; line-height: 1;">⚡</div>
+            <div style="font-size: 0.9rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1; margin: 0.2rem 0;">805</div>
+            <div style="font-size: 0.45rem; opacity: 0.9;">Queries/s</div>
+          </div>
+          
+          <!-- CPU -->
+          <div style="flex: 1; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 0.3rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div style="font-size: 0.9rem; line-height: 1;">🔥</div>
+            <div style="font-size: 0.6rem; font-weight: 600; color: #f59e0b; margin: 0.1rem 0;">42%</div>
+            <div style="font-size: 0.45rem; color: var(--muted);">CPU</div>
           </div>
         </div>
-        <div class="chart-container">
-          <div class="chart-label">Query Performance (ms)</div>
-          <div class="chart-bars" id="chart-bars"></div>
+      </div>
+      
+      <!-- Code - tall right -->
+      <div class="collage-item">
+        <div class="collage-label">Lambda Code</div>
+        <div class="mini-vscode">
+          <div class="lambda-explorer">
+            <div class="explorer-title">Explorer</div>
+            <div class="explorer-item active">
+              <span class="explorer-icon">🐍</span>
+              <span>lambda_function.py</span>
+            </div>
+            <div class="explorer-item">
+              <span class="explorer-icon">📄</span>
+              <span>requirements.txt</span>
+            </div>
+            <div class="explorer-item">
+              <span class="explorer-icon">📄</span>
+              <span>config.py</span>
+            </div>
+          </div>
+          <div class="lambda-header">
+            <div class="lambda-icon">λ</div>
+            <div class="lambda-title">process-data-pipeline</div>
+            <div class="lambda-meta">Python 3.11</div>
+          </div>
+          <div class="lambda-tabs">
+            <div class="lambda-tab active">Code</div>
+            <div class="lambda-tab">Test</div>
+            <div class="lambda-tab">Monitor</div>
+            <div class="lambda-tab">Configuration</div>
+            <div class="lambda-tab">Aliases</div>
+            <div class="lambda-tab">Versions</div>
+          </div>
+          <div class="vscode-tabs">
+            <div class="vscode-tab active">lambda_function.py</div>
+            <div class="vscode-tab">requirements.txt</div>
+          </div>
+          <div class="mini-code" id="mini-code"></div>
+        </div>
+        <div style="background: #fafafa; border: 1px solid #d5dbdb; border-radius: 4px; padding: 0.4rem 0.6rem; margin-top: 2px; font-family: 'Amazon Ember', sans-serif; font-size: 0.45rem; color: #545b64; display: flex; justify-content: space-between; align-items: center;">
+          <span>Modified 2h ago</span>
+          <span style="color: #037f0c; font-weight: 600;">● Deployed</span>
+        </div>
+      </div>
+      
+      <!-- API - bottom left -->
+      <div class="collage-item">
+        <div class="collage-label">API Response</div>
+        <div class="mini-api">
+          <div class="api-header">
+            <span class="api-method">GET</span>
+            <span class="api-endpoint">/api/permits</span>
+          </div>
+          <div class="mini-json" id="mini-json"></div>
+          <div class="api-footer">200 OK • 42ms</div>
         </div>
       </div>
     </div>
@@ -237,133 +476,6 @@
 </div>
 
 <div class="divider"></div>
-
-<!-- ABOUT -->
-<section id="about">
-  <p class="section-label reveal">About me</p>
-  <h2 class="section-title reveal">Data person. Nashville native.</h2>
-  <div class="about-grid">
-
-    <div class="about-photo reveal">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      <span>your photo<br>goes here</span>
-    </div>
-
-    <div class="about-text reveal">
-      <p>
-        Hey! I&rsquo;m Kris &mdash; a <strong>Business Intelligence Engineer</strong> and data analyst based in Nashville, TN.
-        I love the full journey from raw data to real insight: writing the SQL, building the pipeline,
-        designing the architecture, and making sure the right people can actually use what comes out the other end.
-      </p>
-      <p>
-        My day-to-day lives in <strong>SQL, Python, and AWS</strong> &mdash; building ETL pipelines, designing data models,
-        and wiring up services like Glue, Lambda, Redshift, and S3 into something that just works.
-        I care a lot about clean architecture and data that people can trust.
-      </p>
-      <p>
-        Right now I&rsquo;m building <strong>Athenium</strong>, a Nashville data platform that ingests local open data
-        and exposes it as a commercial product, and <strong>Kiwi-Finance</strong>, a personal finance app
-        with real-time transaction tracking powered by Plaid.
-      </p>
-    </div>
-
-    <div class="about-badges reveal">
-      <div class="badge">
-        <div class="badge-icon amazon">&#x1F4E6;</div>
-        <div>
-          <div class="badge-title">Amazon</div>
-          <div class="badge-sub">Full career &mdash; data &amp; analytics</div>
-        </div>
-      </div>
-      <div class="badge">
-        <div class="badge-icon mba">&#x1F393;</div>
-        <div>
-          <div class="badge-title">MBA &mdash; University of North Alabama</div>
-          <div class="badge-sub">Master of Business Administration</div>
-        </div>
-      </div>
-      <div class="badge">
-        <div class="badge-icon uts">&#x1F3DB;&#xFE0F;</div>
-        <div>
-          <div class="badge-title">University of Tennessee Southern</div>
-          <div class="badge-sub">Undergraduate degree</div>
-        </div>
-      </div>
-      <div class="badge">
-        <div class="badge-icon una">&#x1F4CD;</div>
-        <div>
-          <div class="badge-title">Nashville, TN</div>
-          <div class="badge-sub">Based in the Athens of the South</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- VIDEO -->
-<section id="video">
-  <p class="section-label reveal">Watch</p>
-  <h2 class="section-title reveal">What I do &mdash; in 2 minutes</h2>
-  <div class="video-placeholder reveal">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-    <span>paste your YouTube embed here</span>
-    <span style="font-size:0.7rem;opacity:0.6;">replace this div with an &lt;iframe&gt; from YouTube &rarr; Share &rarr; Embed</span>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- AWS SERVICES -->
-<section id="aws">
-  <p class="section-label reveal">Cloud stack</p>
-  <h2 class="section-title reveal">AWS services I work with daily &#x1F4A1;</h2>
-  <div class="aws-grid">
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F5C4;&#xFE0F;</div>
-      <div class="aws-card-name">Amazon S3</div>
-      <div class="aws-card-desc">Data lake storage, raw &amp; processed data, pipeline sink</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F504;</div>
-      <div class="aws-card-name">AWS Glue</div>
-      <div class="aws-card-desc">ETL jobs, data catalog, Spark-based transformations</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F3DB;&#xFE0F;</div>
-      <div class="aws-card-name">Amazon Redshift</div>
-      <div class="aws-card-desc">Data warehouse, analytical queries, BI reporting layer</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x26A1;</div>
-      <div class="aws-card-name">AWS Lambda</div>
-      <div class="aws-card-desc">Serverless pipeline triggers, event-driven data processing</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F5C3;&#xFE0F;</div>
-      <div class="aws-card-name">Amazon RDS</div>
-      <div class="aws-card-desc">Managed PostgreSQL, transactional data, relational models</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x23F0;</div>
-      <div class="aws-card-name">EventBridge</div>
-      <div class="aws-card-desc">Scheduled pipeline runs, event routing, cron-based ETL</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F511;</div>
-      <div class="aws-card-name">Secrets Manager</div>
-      <div class="aws-card-desc">Secure credential storage for pipeline connections</div>
-    </div>
-    <div class="aws-card reveal">
-      <div class="aws-card-icon">&#x1F6E0;&#xFE0F;</div>
-      <div class="aws-card-name">AWS CDK</div>
-      <div class="aws-card-desc">Infrastructure as code, reproducible data platform deployments</div>
-    </div>
-  </div>
-</section>
-
 <div class="divider"></div>
 
 <!-- PROJECTS -->
@@ -588,69 +700,135 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Live Dashboard
+  // Collage Widget
   (function() {
-    const rowsEl = document.getElementById('metric-rows');
-    const pipelinesEl = document.getElementById('metric-pipelines');
-    const chartBars = document.getElementById('chart-bars');
+    // Mini bars - 4 bars for Q1-Q4 cycling through years with sales values
+    const miniBars = document.getElementById('mini-bars');
+    const yearDisplay = document.getElementById('year-display');
     
-    // Animate counter
-    function animateValue(el, start, end, duration) {
-      const range = end - start;
-      const increment = range / (duration / 16);
-      let current = start;
-      const timer = setInterval(() => {
-        current += increment;
-        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
-          current = end;
-          clearInterval(timer);
+    if (miniBars) {
+      let currentStage = 0;
+      const stages = [
+        { year: '2025', color: 'linear-gradient(to top, #2563eb, #0ea5e9)', values: ['$2.4M', '$3.1M', '$2.8M', '$3.5M'] }, // Blue
+        { year: '2026', color: 'linear-gradient(to top, #7c3aed, #a855f7)', values: ['$3.2M', '$3.8M', '$3.5M', '$4.2M'] }, // Purple
+        { year: '2027', color: 'linear-gradient(to top, #059669, #10b981)', values: ['$4.1M', '$4.5M', '$4.3M', '$5.0M'] }  // Green
+      ];
+      
+      for (let i = 0; i < 4; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'mini-bar';
+        bar.style.height = '0%';
+        
+        const value = document.createElement('div');
+        value.className = 'bar-value';
+        value.textContent = '$0';
+        
+        bar.appendChild(value);
+        miniBars.appendChild(bar);
+      }
+      
+      function updateBars() {
+        const stage = stages[currentStage];
+        const bars = miniBars.querySelectorAll('.mini-bar');
+        
+        // Update year display
+        if (yearDisplay) {
+          yearDisplay.textContent = stage.year;
         }
-        el.textContent = Math.floor(current).toLocaleString();
-      }, 16);
+        
+        bars.forEach((bar, i) => {
+          setTimeout(() => {
+            bar.style.background = stage.color;
+            const height = Math.random() * 70 + 20;
+            bar.style.height = height + '%';
+            
+            // Update value
+            const valueEl = bar.querySelector('.bar-value');
+            if (valueEl) {
+              valueEl.textContent = stage.values[i];
+            }
+          }, i * 60);
+        });
+        
+        currentStage = (currentStage + 1) % stages.length;
+      }
+      
+      setTimeout(updateBars, 800);
+      setInterval(updateBars, 3000);
     }
     
-    // Initialize bars
-    const barCount = 12;
-    for (let i = 0; i < barCount; i++) {
-      const bar = document.createElement('div');
-      bar.className = 'chart-bar';
-      bar.style.height = '0%';
-      chartBars.appendChild(bar);
-    }
-    
-    // Animate metrics on load
+    // Mini SQL - simpler query
+    const sqlEl = document.getElementById('mini-sql');
+    const sqlCode = `<span class="sql-keyword">SELECT</span> name, 
+       <span class="sql-function">COUNT</span>(*) <span class="sql-keyword">AS</span> orders
+<span class="sql-keyword">FROM</span> users u
+<span class="sql-keyword">JOIN</span> orders o 
+  <span class="sql-keyword">ON</span> u.id = o.user_id
+<span class="sql-keyword">GROUP BY</span> name
+<span class="sql-keyword">ORDER BY</span> orders <span class="sql-keyword">DESC</span>;`;
     setTimeout(() => {
-      animateValue(rowsEl, 0, 2847392, 2000);
-      animateValue(pipelinesEl, 0, 47, 1500);
-    }, 800);
+      sqlEl.innerHTML = sqlCode;
+    }, 1000);
     
-    // Animate bars
-    const bars = chartBars.querySelectorAll('.chart-bar');
+    // Mini gauges - smaller
     setTimeout(() => {
-      bars.forEach((bar, i) => {
-        setTimeout(() => {
-          const height = Math.random() * 60 + 30;
-          bar.style.height = height + '%';
-        }, i * 80);
-      });
+      const g1 = document.getElementById('gauge-1');
+      const g2 = document.getElementById('gauge-2');
+      if (g1) g1.style.transform = 'rotate(320deg)';
+      if (g2) g2.style.transform = 'rotate(280deg)';
     }, 1200);
     
-    // Update bars periodically
-    setInterval(() => {
-      bars.forEach((bar, i) => {
-        setTimeout(() => {
-          const height = Math.random() * 60 + 30;
-          bar.style.height = height + '%';
-        }, i * 60);
-      });
-    }, 3000);
+    // Mini code - Lambda function
+    const codeEl = document.getElementById('mini-code');
+    const code = `<span class="py-keyword">import</span> boto3
+<span class="py-keyword">import</span> json
+
+<span class="py-keyword">def</span> <span class="py-function">lambda_handler</span>(event, context):
+    <span class="py-comment"># Initialize S3 client</span>
+    s3 = boto3.client(<span class="py-string">'s3'</span>)
     
-    // Update metrics periodically
-    setInterval(() => {
-      const currentRows = parseInt(rowsEl.textContent.replace(/,/g, ''));
-      const newRows = currentRows + Math.floor(Math.random() * 5000 + 1000);
-      animateValue(rowsEl, currentRows, newRows, 800);
-    }, 5000);
+    <span class="py-comment"># Get data from S3 bucket</span>
+    obj = s3.get_object(
+        Bucket=<span class="py-string">'data-lake-prod'</span>,
+        Key=<span class="py-string">'raw/orders.csv'</span>
+    )
+    
+    <span class="py-comment"># Process data</span>
+    data = obj[<span class="py-string">'Body'</span>].read()
+    
+    <span class="py-keyword">return</span> {
+        <span class="py-string">'statusCode'</span>: <span class="py-number">200</span>,
+        <span class="py-string">'body'</span>: json.dumps({
+            <span class="py-string">'message'</span>: <span class="py-string">'ETL Complete'</span>,
+            <span class="py-string">'records'</span>: <span class="py-number">2847291</span>
+        })
+    }`;
+    setTimeout(() => {
+      codeEl.innerHTML = code;
+    }, 1400);
+    
+    // Mini JSON - sample data
+    const jsonEl = document.getElementById('mini-json');
+    const json = `{
+  <span class="json-key">"status"</span>: <span class="json-string">"success"</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-number">1847</span>,
+      <span class="json-key">"permit_type"</span>: <span class="json-string">"commercial"</span>,
+      <span class="json-key">"value"</span>: <span class="json-number">284000</span>,
+      <span class="json-key">"address"</span>: <span class="json-string">"Broadway"</span>
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-number">1848</span>,
+      <span class="json-key">"permit_type"</span>: <span class="json-string">"residential"</span>,
+      <span class="json-key">"value"</span>: <span class="json-number">125000</span>,
+      <span class="json-key">"address"</span>: <span class="json-string">"Music Row"</span>
+    }
+  ]
+}`;
+    setTimeout(() => {
+      jsonEl.innerHTML = json;
+    }, 1600);
   })();
 </script>
 
